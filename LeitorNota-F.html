@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitor de Nota fiscal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    
+</style>
+
+</head>
+<body>
+    <h1>Emissão de Nota Fiscal de Serviço</h1>
+
+    <form id="notaFiscalForm">
+        <label for="clienteNome">Nome do Cliente:</label>
+        <input type="text" id="clienteNome" required>
+
+        <label for="servicoValor">Valor do Serviço:</label>
+        <input type="number" id="servicoValor" required>
+
+        <label for="aliquota">Alíquota de Imposto (%):</label>
+        <input type="number" id="aliquota" required>
+
+        <button type="button" onclick="calcularNotaFiscal()">Emitir Nota Fiscal</button>
+    </form>
+
+    <div id="notaFiscalResult" style="display: none; margin-top: 20px;">
+        <h2>Nota Fiscal</h2>
+        <p><strong>Cliente:</strong> <span id="nfCliente"></span></p>
+        <p><strong>Valor do Serviço:</strong> R$ <span id="nfValor"></span></p>
+        <p><strong>Imposto:</strong> R$ <span id="nfImposto"></span></p>
+        <p><strong>Total:</strong> R$ <span id="nfTotal"></span></p>
+    </div>
+
+    <script>
+        function calcularNotaFiscal() {
+            // Obter dados do formulário
+            var clienteNome = document.getElementById('clienteNome').value;
+            var servicoValor = parseFloat(document.getElementById('servicoValor').value);
+            var aliquota = parseFloat(document.getElementById('aliquota').value);
+
+            // Calcular imposto
+            var imposto = (servicoValor * aliquota) / 100;
+
+            // Calcular total
+            var total = servicoValor + imposto;
+
+            // Exibir resultados na página
+            document.getElementById('nfCliente').textContent = clienteNome;
+            document.getElementById('nfValor').textContent = servicoValor.toFixed(2);
+            document.getElementById('nfImposto').textContent = imposto.toFixed(2);
+            document.getElementById('nfTotal').textContent = total.toFixed(2);
+
+            // Exibir a seção da nota fiscal
+            document.getElementById('notaFiscalResult').style.display = 'block';
+        }
+    </script>
+    
+</body>
+</html>
